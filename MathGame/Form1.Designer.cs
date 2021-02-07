@@ -1,7 +1,7 @@
 ﻿
 namespace MathGame
 {
-    partial class Form1
+    partial class mathGame
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,8 @@ namespace MathGame
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.timeLabel = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mathGame));
             this.timeLeftTextBox = new System.Windows.Forms.Label();
             this.plusLeftLabel = new System.Windows.Forms.Label();
             this.plusSign = new System.Windows.Forms.Label();
@@ -53,21 +53,14 @@ namespace MathGame
             this.equalSignFour = new System.Windows.Forms.Label();
             this.quotient = new System.Windows.Forms.NumericUpDown();
             this.startButton = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timeLabel = new System.Windows.Forms.Label();
+            this.endButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.difference)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.product)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quotient)).BeginInit();
             this.SuspendLayout();
-            // 
-            // timeLabel
-            // 
-            this.timeLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.timeLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.timeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timeLabel.Location = new System.Drawing.Point(764, 9);
-            this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(150, 30);
-            this.timeLabel.TabIndex = 0;
             // 
             // timeLeftTextBox
             // 
@@ -133,7 +126,7 @@ namespace MathGame
             this.sum.Size = new System.Drawing.Size(75, 45);
             this.sum.TabIndex = 2;
             this.sum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.sum.ValueChanged += new System.EventHandler(this.sum_ValueChanged);
+            this.sum.Enter += new System.EventHandler(this.Answer_Enter);
             // 
             // minusLeftLabel
             // 
@@ -188,6 +181,7 @@ namespace MathGame
             this.difference.Size = new System.Drawing.Size(75, 45);
             this.difference.TabIndex = 3;
             this.difference.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.difference.Enter += new System.EventHandler(this.Answer_Enter2);
             // 
             // timesLeftLabel
             // 
@@ -242,6 +236,7 @@ namespace MathGame
             this.product.Size = new System.Drawing.Size(75, 45);
             this.product.TabIndex = 4;
             this.product.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.product.Enter += new System.EventHandler(this.Answer_Enter3);
             // 
             // dividedLeftLabel
             // 
@@ -296,25 +291,55 @@ namespace MathGame
             this.quotient.Size = new System.Drawing.Size(75, 45);
             this.quotient.TabIndex = 5;
             this.quotient.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.quotient.Enter += new System.EventHandler(this.Answer_Enter4);
             // 
             // startButton
             // 
             this.startButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startButton.Location = new System.Drawing.Point(443, 371);
+            this.startButton.Location = new System.Drawing.Point(12, 386);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(240, 52);
             this.startButton.TabIndex = 1;
             this.startButton.Text = "Start Game";
             this.startButton.UseVisualStyleBackColor = false;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            this.startButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
-            // Form1
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
+            // 
+            // timeLabel
+            // 
+            this.timeLabel.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.timeLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.timeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeLabel.Location = new System.Drawing.Point(747, 9);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(169, 30);
+            this.timeLabel.TabIndex = 21;
+            // 
+            // endButton
+            // 
+            this.endButton.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.endButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endButton.Location = new System.Drawing.Point(278, 386);
+            this.endButton.Name = "endButton";
+            this.endButton.Size = new System.Drawing.Size(240, 52);
+            this.endButton.TabIndex = 22;
+            this.endButton.Text = "Finish Game";
+            this.endButton.UseVisualStyleBackColor = false;
+            this.endButton.Click += new System.EventHandler(this.endButton_Click);
+            // 
+            // mathGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(928, 450);
+            this.Controls.Add(this.endButton);
+            this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.quotient);
             this.Controls.Add(this.equalSignFour);
@@ -337,10 +362,9 @@ namespace MathGame
             this.Controls.Add(this.plusSign);
             this.Controls.Add(this.plusLeftLabel);
             this.Controls.Add(this.timeLeftTextBox);
-            this.Controls.Add(this.timeLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "mathGame";
             this.Text = "MathGame by Jalal";
             ((System.ComponentModel.ISupportInitialize)(this.sum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.difference)).EndInit();
@@ -351,8 +375,6 @@ namespace MathGame
         }
 
         #endregion
-
-        private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.Label timeLeftTextBox;
         private System.Windows.Forms.Label plusLeftLabel;
         private System.Windows.Forms.Label plusSign;
@@ -375,6 +397,9 @@ namespace MathGame
         private System.Windows.Forms.Label equalSignFour;
         private System.Windows.Forms.NumericUpDown quotient;
         private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.Button endButton;
     }
 }
 
